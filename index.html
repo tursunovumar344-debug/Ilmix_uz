@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILMIX — AI Ustoz</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f7ff;
+    color: #171638;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    border-bottom: 1px solid #e7e3f7;
+}
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: #6338e8;
+}
+nav a {
+    text-decoration: none;
+    color: #4e5270;
+    margin: 0 12px;
+    font-size: 14px;
+}
+button {
+    border: none;
+    background: #6939e8;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 7%;
+    gap: 30px;
+}
+.hero h1 {
+    font-size: 60px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+.hero h1 span {
+    color: #6338e8;
+}
+.hero p {
+    color: #69708e;
+    font-size: 18px;
+    line-height: 1.7;
+}
+.search {
+    display: flex;
+    background: white;
+    padding: 8px;
+    border-radius: 15px;
+    margin-top: 25px;
+    max-width: 550px;
+    border: 1px solid #e0d9ff;
+}
+.search input {
+    flex: 1;
+    min-width: 0;
+    padding: 15px;
+    border: none;
+    outline: none;
+}
+.hero-image {
+    background: linear-gradient(135deg, #e4d9ff, #dce8ff);
+    border-radius: 50%;
+    width: 350px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 110px;
+}
+section {
+    padding: 50px 7%;
+}
+section h2 {
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+.card {
+    flex: 1;
+    min-width: 200px;
+    background: white;
+    border: 1px solid #ece8ff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px #5e44bd08;
+}
+.card h3 {
+    color: #6338e8;
+    margin-bottom: 12px;
+}
+.card p {
+    color: #69708e;
+    line-height: 1.6;
+}
+.subjects {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.subject {
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.subject:hover {
+    transform: translateY(-3px);
+}
+.blue { background: #e3edff; }
+.green { background: #e0f8ed; }
+.purple { background: #eee5ff; }
+.orange { background: #fff0df; }
+.mint { background: #e3f8df; }
+.sky { background: #e2edff; }
+.why {
+    background: #eee8ff;
+    padding: 40px;
+    border-radius: 25px;
+    margin: 50px 7%;
+}
+.why p {
+    color: #69708e;
+    line-height: 1.7;
+}
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #69708e;
+    border-top: 1px solid #e7e3f7;
+}
+@media(max-width:800px) {
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    nav {
+        width: 100%;
+        order: 3;
+    }
+    nav a {
+        margin: 0 7px;
+        font-size: 12px;
+    }
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 50px 6%;
+    }
+    .hero h1 {
+        font-size: 42px;
+    }
+    .hero-image {
+        width: 260px;
+        height: 260px;
+        font-size: 80px;
+        align-self: center;
+    }
+    .search input {
+        width: 100%;
+    }
+    .subjects {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media(max-width:450px) {
+    .cards {
+        flex-direction: column;
+    }
+    .search {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .search button {
+        width: 100%;
+    }
+    .subjects {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+    <div class="logo">🎓 ILMIX</div>
+    <nav>
+        <a href="#">Bosh sahifa</a>
+        <a href="#fanlar">Fanlar</a>
+        <a href="#ustoz">AI Ustoz</a>
+        <a href="#video">Video darslar</a>
+    </nav>
+    <button onclick="goTeacher()">Boshlash →</button>
+</header>
+<main>
+<div class="hero">
+    <div>
+        <h1>Har bir mavzu<br>
+        <span>endilikda tushunarli!</span></h1>
+        <p>ILMIX — sening aqlli AI ustozing.<br>
+        Maktab darslarini oson, qiziqarli va samarali o‘rgan.</p>
+        <div class="search" id="ustoz">
+            <input id="topic" placeholder="Qaysi mavzuni o‘rganamiz?">
+            <button onclick="lesson()">Izlash →</button>
+        </div>
+    </div>
+    <div class="hero-image">🎓</div>
+</div>
+<section id="imkoniyatlar">
+    <h2>ILMIX imkoniyatlari</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>🤖 AI Ustoz</h3>
+            <p>Savollaringga javob va mavzularni sodda tushuntirish.</p>
+        </div>
+        <div class="card" id="video">
+            <h3>▶ Video darslar</h3>
+            <p>Animatsiya va ko‘rgazmali darslar orqali o‘rgan.</p>
+        </div>
+        <div class="card">
+            <h3>🎧 Ovozli dars</h3>
+            <p>Mavzularni ovoz orqali tinglab o‘rgan.</p>
+        </div>
+        <div class="card">
+            <h3>↻ Qayta tushuntirish</h3>
+            <p>Tushunmagan mavzuni boshqa usulda o‘rgan.</p>
+        </div>
+    </div>
+</section>
+<section id="fanlar">
+    <h2>Fanlar</h2>
+    <div class="subjects">
+        <div class="subject blue" onclick="pick('Matematika')">
+            🧮<br>Matematika
+        </div>
+        <div class="subject green" onclick="pick('Ingliz tili')">
+            🇬🇧<br>Ingliz tili
+        </div>
+        <div class="subject purple" onclick="pick('Fizika')">
+            ⚛️<br>Fizika
+        </div>
+        <div class="subject mint" onclick="pick('Biologiya')">
+            🌱<br>Biologiya
+        </div>
+        <div class="subject orange" onclick="pick('Kimyo')">
+            ⚗️<br>Kimyo
+        </div>
+        <div class="subject sky" onclick="pick('Geografiya')">
+            🌍<br>Geografiya
+        </div>
+    </div>
+</section>
+<div class="why">
+    <h2>⭐ Nega aynan ILMIX?</h2>
+    <p>Chunki biz bilim olishni yanada oson va qiziqarli qilishga harakat qilamiz!</p>
+    <br>
+    <h3>Bilim olish — o‘z qo‘lingda.</h3>
+</div>
+</main>
+<footer>
+    ILMIX © 2026 | Hammasiga erishish o‘z qo‘lingda.
+</footer>
+<script>
+function goTeacher() {
+    document.getElementById("ustoz").scrollIntoView({
+        behavior: "smooth"
+    });
+    document.getElementById("topic").focus();
+}
+function pick(fan) {
+    document.getElementById("topic").value =
+        fan + " mavzusini tushuntir";
+    goTeacher();
+}
+function lesson() {
+    let topic = document.getElementById("topic").value;
+    if(topic.trim() == "") {
+        alert("Avval mavzuni yozing!");
+    } else {
+        alert("AI Ustoz keyingi bosqichda ulanadi: " + topic);
+    }
+}
+document.getElementById("topic").addEventListener("keydown", function(e) {
+    if(e.key == "Enter") {
+        lesson();
+    }
+});
+</script>
+</body>
+</html>
