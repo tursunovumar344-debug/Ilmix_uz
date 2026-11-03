@@ -3,312 +3,1658 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ILMIX — AI Ustoz</title>
+<title>ILMIX — Bilim platformasi</title>
+
 <style>
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f8f7ff;
-    color: #171638;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: #f4f7fc;
+  color: #182338;
 }
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 7%;
-    border-bottom: 1px solid #e7e3f7;
+
+button, input, textarea {
+  font: inherit;
 }
-.logo {
-    font-size: 28px;
-    font-weight: 900;
-    color: #6338e8;
-}
-nav a {
-    text-decoration: none;
-    color: #4e5270;
-    margin: 0 12px;
-    font-size: 14px;
-}
+
 button {
-    border: none;
-    background: #6939e8;
-    color: white;
-    padding: 13px 20px;
-    border-radius: 12px;
-    cursor: pointer;
+  cursor: pointer;
 }
-.hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 80px 7%;
-    gap: 30px;
+
+.app {
+  display: flex;
+  min-height: 100vh;
 }
-.hero h1 {
-    font-size: 60px;
-    line-height: 1.1;
-    margin-bottom: 20px;
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 245px;
+  background: white;
+  border-right: 1px solid #e8edf5;
+  padding: 25px 17px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 20;
 }
-.hero h1 span {
-    color: #6338e8;
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px 28px;
 }
-.hero p {
-    color: #69708e;
-    font-size: 18px;
-    line-height: 1.7;
+
+.logo-icon {
+  background: linear-gradient(135deg, #536dff, #8156ff);
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: bold;
 }
+
+.logo h2 {
+  font-size: 24px;
+  color: #3158e8;
+  letter-spacing: 1px;
+}
+
+.logo p {
+  font-size: 11px;
+  color: #8792a7;
+}
+
+.menu-title {
+  font-size: 11px;
+  color: #9aa5b8;
+  margin: 8px 12px 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 13px 14px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #69768c;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.nav-btn:hover {
+  background: #f2f5ff;
+  color: #4565ed;
+}
+
+.nav-btn.active {
+  background: #edf1ff;
+  color: #4163ed;
+  font-weight: 600;
+}
+
+.nav-icon {
+  font-size: 19px;
+  width: 24px;
+  text-align: center;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.sidebar-bottom button {
+  width: 100%;
+  border: none;
+  background: #f5f7fc;
+  padding: 12px;
+  border-radius: 12px;
+  color: #59667c;
+}
+
+/* MAIN */
+
+.main {
+  margin-left: 245px;
+  width: calc(100% - 245px);
+  min-width: 0;
+}
+
+.topbar {
+  height: 82px;
+  padding: 0 35px;
+  background: white;
+  border-bottom: 1px solid #e8edf5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .search {
-    display: flex;
-    background: white;
-    padding: 8px;
-    border-radius: 15px;
-    margin-top: 25px;
-    max-width: 550px;
-    border: 1px solid #e0d9ff;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
 }
+
 .search input {
-    flex: 1;
-    min-width: 0;
-    padding: 15px;
-    border: none;
-    outline: none;
+  width: 100%;
+  padding: 13px 17px 13px 43px;
+  border: 1px solid #e5eaf3;
+  background: #f8faff;
+  border-radius: 13px;
+  outline: none;
+  font-size: 14px;
 }
-.hero-image {
-    background: linear-gradient(135deg, #e4d9ff, #dce8ff);
-    border-radius: 50%;
-    width: 350px;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 110px;
+
+.search input:focus {
+  border-color: #7890ff;
 }
-section {
-    padding: 50px 7%;
+
+.search span {
+  position: absolute;
+  left: 15px;
+  top: 13px;
+  color: #8995a9;
 }
-section h2 {
-    font-size: 32px;
-    margin-bottom: 25px;
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 17px;
 }
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
+
+.icon-btn {
+  border: none;
+  background: #f5f7fc;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 18px;
 }
-.card {
-    flex: 1;
-    min-width: 200px;
-    background: white;
-    border: 1px solid #ece8ff;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px #5e44bd08;
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #dce5ff, #e8dfff);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
 }
-.card h3 {
-    color: #6338e8;
-    margin-bottom: 12px;
+
+.content {
+  max-width: 1500px;
+  padding: 30px 35px 45px;
+  margin: auto;
 }
-.card p {
-    color: #69708e;
-    line-height: 1.6;
+
+/* HERO */
+
+.hero {
+  background: linear-gradient(110deg, #4669f5, #7558f6);
+  border-radius: 24px;
+  padding: 35px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  overflow: hidden;
+  min-height: 245px;
+  position: relative;
 }
+
+.hero-text {
+  max-width: 600px;
+  z-index: 1;
+}
+
+.hero-label {
+  display: inline-block;
+  background: #ffffff25;
+  border: 1px solid #ffffff35;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 17px;
+}
+
+.hero h1 {
+  font-size: clamp(25px, 3vw, 38px);
+  line-height: 1.2;
+  margin-bottom: 13px;
+}
+
+.hero p {
+  color: #e5eaff;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+.primary-btn {
+  border: none;
+  background: white;
+  color: #4665e9;
+  padding: 13px 20px;
+  border-radius: 12px;
+  margin-top: 23px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px #253fc530;
+}
+
+.hero-art {
+  font-size: 110px;
+  min-width: 170px;
+  text-align: center;
+  filter: drop-shadow(0 10px 10px #273ac530);
+}
+
+/* SECTION */
+
+.section {
+  margin-top: 30px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+}
+
+.section-header p {
+  color: #8b97aa;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.link-btn {
+  border: none;
+  background: transparent;
+  color: #4968ec;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* STATS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 25px;
+}
+
+.stat-card {
+  background: white;
+  padding: 21px;
+  border-radius: 18px;
+  border: 1px solid #edf0f6;
+}
+
+.stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.blue { background: #edf1ff; color: #526cf3; }
+.purple { background: #f2eaff; color: #8755ed; }
+.green { background: #e7f9ef; color: #21a96b; }
+.orange { background: #fff1e4; color: #f29a42; }
+
+.stat-card h3 {
+  font-size: 27px;
+  margin-top: 15px;
+}
+
+.stat-card p {
+  color: #8995a8;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* SUBJECTS */
+
 .subjects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
 }
-.subject {
+
+.subject-card {
+  background: white;
+  border: 1px solid #edf0f6;
+  border-radius: 18px;
+  padding: 21px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.subject-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px #23365c0c;
+  border-color: #dce3ff;
+}
+
+.subject-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.subject-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+}
+
+.subject-card h3 {
+  font-size: 17px;
+  margin-top: 18px;
+}
+
+.subject-card p {
+  color: #8995a8;
+  font-size: 13px;
+  margin-top: 7px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-top: 19px;
+  color: #77849a;
+}
+
+.progress {
+  height: 7px;
+  background: #edf1f7;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 9px;
+}
+
+.progress div {
+  height: 100%;
+  border-radius: 20px;
+}
+
+/* FEATURES */
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 17px;
+}
+
+.feature-card {
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+}
+
+.ai-card {
+  background: #f0eaff;
+}
+
+.test-card {
+  background: #e8f9ef;
+}
+
+.feature-card h3 {
+  font-size: 20px;
+}
+
+.feature-card p {
+  color: #69758b;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 9px;
+}
+
+.feature-card span {
+  font-size: 55px;
+}
+
+/* ACTIVITY */
+
+.activity {
+  background: white;
+  border: 1px solid #edf0f6;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f2f7;
+}
+
+.activity-item:last-child {
+  border: none;
+}
+
+.activity-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  background: #edf1ff;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.activity-item h4 {
+  font-size: 14px;
+}
+
+.activity-item p {
+  color: #8995a8;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.activity-score {
+  margin-left: auto;
+  color: #22a66a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* PAGES */
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.page-title {
+  font-size: 27px;
+  margin-bottom: 8px;
+}
+
+.page-description {
+  color: #8995a8;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #edf0f6;
+  margin-bottom: 18px;
+}
+
+.panel h3 {
+  margin-bottom: 15px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #e3e8f2;
+  border-radius: 12px;
+  outline: none;
+  margin-bottom: 12px;
+  background: #f9fbff;
+}
+
+.action-btn {
+  background: #4d69f1;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 13px 18px;
+}
+
+.secondary-btn {
+  background: #edf1ff;
+  color: #4b67e9;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.chat-box {
+  min-height: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 15px;
+  background: #f8faff;
+  border-radius: 14px;
+  margin-bottom: 15px;
+}
+
+.chat-message {
+  padding: 12px 15px;
+  background: #eaf0ff;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  max-width: 90%;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.chat-message.user {
+  background: #4d69f1;
+  color: white;
+  margin-left: auto;
+}
+
+.lesson-text {
+  line-height: 1.9;
+  color: #536078;
+  font-size: 15px;
+}
+
+.lesson-text h3 {
+  color: #182338;
+  margin: 20px 0 10px;
+}
+
+.lesson-text p {
+  margin-bottom: 12px;
+}
+
+.lesson-example {
+  background: #edf2ff;
+  padding: 16px;
+  border-radius: 12px;
+  color: #405bd5;
+  margin: 15px 0;
+}
+
+.quiz-option {
+  display: block;
+  padding: 14px;
+  border: 1px solid #e4e9f3;
+  border-radius: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.quiz-option:hover {
+  background: #f3f6ff;
+}
+
+.quiz-option input {
+  margin-right: 10px;
+}
+
+.result-message {
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+/* DARK MODE */
+
+body.dark {
+  background: #111827;
+  color: #e8edf7;
+}
+
+body.dark .sidebar,
+body.dark .topbar,
+body.dark .stat-card,
+body.dark .subject-card,
+body.dark .activity,
+body.dark .panel {
+  background: #1b2434;
+  border-color: #29354a;
+}
+
+body.dark .nav-btn {
+  color: #a9b5ca;
+}
+
+body.dark .nav-btn.active {
+  background: #283657;
+  color: #9eb0ff;
+}
+
+body.dark .search input,
+body.dark .form-input,
+body.dark .chat-box {
+  background: #111827;
+  color: white;
+  border-color: #29354a;
+}
+
+body.dark .sidebar-bottom button {
+  background: #263145;
+  color: white;
+}
+
+body.dark .subject-card p,
+body.dark .stat-card p,
+body.dark .page-description,
+body.dark .activity-item p,
+body.dark .section-header p {
+  color: #a4b0c4;
+}
+
+body.dark .lesson-text {
+  color: #b5c0d4;
+}
+
+body.dark .lesson-text h3 {
+  color: white;
+}
+
+body.dark .activity-item {
+  border-color: #29354a;
+}
+
+body.dark .quiz-option {
+  border-color: #29354a;
+}
+
+/* MOBILE NAV */
+
+.mobile-nav {
+  display: none;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .subjects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-art {
+    font-size: 85px;
+  }
+
+  .content {
     padding: 25px;
-    border-radius: 18px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+  }
+
+  .topbar {
+    padding: 0 25px;
+  }
 }
-.subject:hover {
-    transform: translateY(-3px);
+
+@media (max-width: 760px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .topbar {
+    height: 65px;
+    padding: 0 15px;
+  }
+
+  .search input {
+    padding: 11px 12px 11px 37px;
+    font-size: 12px;
+  }
+
+  .search span {
+    top: 11px;
+    left: 12px;
+  }
+
+  .top-right {
+    gap: 9px;
+  }
+
+  .icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .content {
+    padding: 17px 14px 100px;
+  }
+
+  .hero {
+    padding: 25px 20px;
+    min-height: 210px;
+    border-radius: 19px;
+  }
+
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .hero p {
+    font-size: 13px;
+  }
+
+  .hero-art {
+    font-size: 55px;
+    min-width: 65px;
+  }
+
+  .hero-label {
+    font-size: 10px;
+  }
+
+  .primary-btn {
+    padding: 12px 16px;
+    margin-top: 17px;
+  }
+
+  .stats {
+    gap: 10px;
+    margin-top: 17px;
+  }
+
+  .stat-card {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+
+  .stat-card h3 {
+    font-size: 23px;
+    margin-top: 12px;
+  }
+
+  .stat-card p {
+    font-size: 11px;
+  }
+
+  .section {
+    margin-top: 25px;
+  }
+
+  .section-header h2 {
+    font-size: 19px;
+  }
+
+  .section-header p {
+    font-size: 11px;
+  }
+
+  .subjects {
+    gap: 10px;
+  }
+
+  .subject-card {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .subject-icon {
+    width: 39px;
+    height: 39px;
+    font-size: 19px;
+  }
+
+  .subject-card h3 {
+    font-size: 15px;
+    margin-top: 14px;
+  }
+
+  .subject-card p {
+    font-size: 11px;
+  }
+
+  .progress-info {
+    font-size: 10px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .feature-card span {
+    font-size: 42px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .mobile-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: white;
+    border-top: 1px solid #e8edf5;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 50;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  body.dark .mobile-nav {
+    background: #1b2434;
+    border-color: #29354a;
+  }
+
+  .mobile-nav button {
+    border: none;
+    background: transparent;
+    color: #8490a5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    min-width: 55px;
+  }
+
+  .mobile-nav button span {
+    font-size: 20px;
+  }
+
+  .mobile-nav button.active {
+    color: #4d69f1;
+    font-weight: 700;
+  }
 }
-.blue { background: #e3edff; }
-.green { background: #e0f8ed; }
-.purple { background: #eee5ff; }
-.orange { background: #fff0df; }
-.mint { background: #e3f8df; }
-.sky { background: #e2edff; }
-.why {
-    background: #eee8ff;
-    padding: 40px;
-    border-radius: 25px;
-    margin: 50px 7%;
-}
-.why p {
-    color: #69708e;
-    line-height: 1.7;
-}
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #69708e;
-    border-top: 1px solid #e7e3f7;
-}
-@media(max-width:800px) {
-    header {
-        flex-wrap: wrap;
-        gap: 15px;
-    }
-    nav {
-        width: 100%;
-        order: 3;
-    }
-    nav a {
-        margin: 0 7px;
-        font-size: 12px;
-    }
-    .hero {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 50px 6%;
-    }
-    .hero h1 {
-        font-size: 42px;
-    }
-    .hero-image {
-        width: 260px;
-        height: 260px;
-        font-size: 80px;
-        align-self: center;
-    }
-    .search input {
-        width: 100%;
-    }
-    .subjects {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-@media(max-width:450px) {
-    .cards {
-        flex-direction: column;
-    }
-    .search {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .search button {
-        width: 100%;
-    }
-    .subjects {
-        grid-template-columns: 1fr 1fr;
-    }
+
+@media (max-width: 390px) {
+  .hero-art {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .subjects {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .top-right .icon-btn {
+    display: none;
+  }
+
+  .section-header h2 {
+    font-size: 17px;
+  }
 }
 </style>
 </head>
+
 <body>
-<header>
-    <div class="logo">🎓 ILMIX</div>
-    <nav>
-        <a href="#">Bosh sahifa</a>
-        <a href="#fanlar">Fanlar</a>
-        <a href="#ustoz">AI Ustoz</a>
-        <a href="#video">Video darslar</a>
-    </nav>
-    <button onclick="goTeacher()">Boshlash →</button>
-</header>
-<main>
-<div class="hero">
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <div class="logo">
+    <div class="logo-icon">I</div>
     <div>
-        <h1>Har bir mavzu<br>
-        <span>endilikda tushunarli!</span></h1>
-        <p>ILMIX — sening aqlli AI ustozing.<br>
-        Maktab darslarini oson, qiziqarli va samarali o‘rgan.</p>
-        <div class="search" id="ustoz">
-            <input id="topic" placeholder="Qaysi mavzuni o‘rganamiz?">
-            <button onclick="lesson()">Izlash →</button>
-        </div>
+      <h2>ILMIX</h2>
+      <p>Bilim sari yo‘l</p>
     </div>
-    <div class="hero-image">🎓</div>
-</div>
-<section id="imkoniyatlar">
-    <h2>ILMIX imkoniyatlari</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>🤖 AI Ustoz</h3>
-            <p>Savollaringga javob va mavzularni sodda tushuntirish.</p>
-        </div>
-        <div class="card" id="video">
-            <h3>▶ Video darslar</h3>
-            <p>Animatsiya va ko‘rgazmali darslar orqali o‘rgan.</p>
-        </div>
-        <div class="card">
-            <h3>🎧 Ovozli dars</h3>
-            <p>Mavzularni ovoz orqali tinglab o‘rgan.</p>
-        </div>
-        <div class="card">
-            <h3>↻ Qayta tushuntirish</h3>
-            <p>Tushunmagan mavzuni boshqa usulda o‘rgan.</p>
-        </div>
+  </div>
+
+  <div class="menu-title">ASOSIY MENYU</div>
+
+  <button class="nav-btn active" onclick="showPage('home',this)">
+    <span class="nav-icon">⌂</span> Bosh sahifa
+  </button>
+
+  <button class="nav-btn" onclick="showPage('subjects',this)">
+    <span class="nav-icon">📚</span> Fanlar
+  </button>
+
+  <button class="nav-btn" onclick="showPage('ai',this)">
+    <span class="nav-icon">🤖</span> AI Ustoz
+  </button>
+
+  <button class="nav-btn" onclick="showPage('tests',this)">
+    <span class="nav-icon">📝</span> Testlar
+  </button>
+
+  <button class="nav-btn" onclick="showPage('results',this)">
+    <span class="nav-icon">📊</span> Natijalar
+  </button>
+
+  <button class="nav-btn" onclick="showPage('profile',this)">
+    <span class="nav-icon">👤</span> Profil
+  </button>
+
+  <div class="sidebar-bottom">
+    <button onclick="toggleTheme()">🌙 / ☀️ Rejimni almashtirish</button>
+  </div>
+
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<header class="topbar">
+
+  <div class="search">
+    <span>⌕</span>
+    <input id="searchInput" placeholder="Fan yoki mavzu qidirish..." oninput="searchSubjects()">
+  </div>
+
+  <div class="top-right">
+    <button class="icon-btn" onclick="alert('Bildirishnomalar hozircha bo‘sh')">🔔</button>
+    <div class="avatar">👨🏻‍🎓</div>
+  </div>
+
+</header>
+
+<div class="content">
+
+<!-- HOME -->
+<section class="page active" id="home">
+
+  <div class="hero">
+
+    <div class="hero-text">
+      <div class="hero-label">🎓 O‘QISH VA RIVOJLANISH</div>
+
+      <h1>ILMIX bilan<br>bilimingni oshir!</h1>
+
+      <p>Har kuni yangi bilim, yangi imkoniyat.<br>
+      O‘rgan, mashq qil va natijaga erish.</p>
+
+      <button class="primary-btn" onclick="showPage('subjects')">
+        O‘qishni boshlash →
+      </button>
     </div>
+
+    <div class="hero-art">🎒📚</div>
+
+  </div>
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon blue">📈</div>
+        <span style="color:#22a66a;font-size:12px">+5%</span>
+      </div>
+      <h3 id="progressNumber">0%</h3>
+      <p>Umumiy progress</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon purple">📖</div>
+      </div>
+      <h3 id="lessonNumber">0</h3>
+      <p>O‘rganilgan mavzular</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon green">📝</div>
+      </div>
+      <h3 id="testNumber">0</h3>
+      <p>Yechilgan testlar</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-top">
+        <div class="stat-icon orange">🏆</div>
+      </div>
+      <h3 id="scoreNumber">0</h3>
+      <p>To‘plangan ball</p>
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-header">
+      <div>
+        <h2>Fanlaring</h2>
+        <p>O‘rganishni davom ettir</p>
+      </div>
+      <button class="link-btn" onclick="showPage('subjects')">Barchasi →</button>
+    </div>
+
+    <div class="subjects" id="homeSubjects"></div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-header">
+      <div>
+        <h2>O‘rganish imkoniyatlari</h2>
+        <p>Bilimingni yangi bosqichga olib chiq</p>
+      </div>
+    </div>
+
+    <div class="features">
+
+      <div class="feature-card ai-card" onclick="showPage('ai')">
+        <div>
+          <h3>AI Ustoz</h3>
+          <p>Savollaringga tushunarli javoblar<br>va mavzularni izohlash.</p>
+          <button class="secondary-btn" style="margin-top:15px">AI Ustozga o‘tish →</button>
+        </div>
+        <span>🤖</span>
+      </div>
+
+      <div class="feature-card test-card" onclick="showPage('tests')">
+        <div>
+          <h3>Testlar</h3>
+          <p>Bilimingni tekshir va<br>yangi natijalarga erish.</p>
+          <button class="secondary-btn" style="margin-top:15px">Test boshlash →</button>
+        </div>
+        <span>📝</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="section">
+
+    <div class="section-header">
+      <div>
+        <h2>Oxirgi faoliyat</h2>
+        <p>O‘qish tarixing</p>
+      </div>
+    </div>
+
+    <div class="activity" id="activityList">
+      <div class="activity-item">
+        <div class="activity-icon">📘</div>
+        <div>
+          <h4>ILMIX platformasi</h4>
+          <p>O‘qishni boshlashga tayyorsan</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </section>
-<section id="fanlar">
-    <h2>Fanlar</h2>
-    <div class="subjects">
-        <div class="subject blue" onclick="pick('Matematika')">
-            🧮<br>Matematika
-        </div>
-        <div class="subject green" onclick="pick('Ingliz tili')">
-            🇬🇧<br>Ingliz tili
-        </div>
-        <div class="subject purple" onclick="pick('Fizika')">
-            ⚛️<br>Fizika
-        </div>
-        <div class="subject mint" onclick="pick('Biologiya')">
-            🌱<br>Biologiya
-        </div>
-        <div class="subject orange" onclick="pick('Kimyo')">
-            ⚗️<br>Kimyo
-        </div>
-        <div class="subject sky" onclick="pick('Geografiya')">
-            🌍<br>Geografiya
-        </div>
-    </div>
+
+<!-- SUBJECTS -->
+<section class="page" id="subjects">
+
+  <h1 class="page-title">Fanlar</h1>
+  <p class="page-description">O‘zingga kerakli fanni tanla va o‘rganishni boshlagin.</p>
+
+  <div class="subjects" id="allSubjects"></div>
+
 </section>
-<div class="why">
-    <h2>⭐ Nega aynan ILMIX?</h2>
-    <p>Chunki biz bilim olishni yanada oson va qiziqarli qilishga harakat qilamiz!</p>
-    <br>
-    <h3>Bilim olish — o‘z qo‘lingda.</h3>
+
+<!-- AI -->
+<section class="page" id="ai">
+
+  <h1 class="page-title">AI Ustoz</h1>
+  <p class="page-description">Savolingni yoz va o‘rganishni boshlagin.</p>
+
+  <div class="panel">
+
+    <div class="chat-box" id="chatBox">
+      <div class="chat-message">
+        Salom! Men ILMIX AI Ustoz interfeysiman. Hozircha demo rejimda ishlayman.
+        Mavzu yoki savolingni yozishing mumkin.
+      </div>
+    </div>
+
+    <textarea class="form-input" id="aiInput" rows="3" placeholder="Savolingni yoz..."></textarea>
+
+    <button class="action-btn" onclick="sendAI()">Yuborish →</button>
+
+  </div>
+
+  <div class="panel">
+    <h3>Tezkor savollar</h3>
+    <button class="secondary-btn" onclick="quickAI('Matematikadan yordam ber')">Matematika</button>
+    <button class="secondary-btn" onclick="quickAI('Ingliz tilini tushuntir')">Ingliz tili</button>
+    <button class="secondary-btn" onclick="quickAI('Fizikani tushuntir')">Fizika</button>
+  </div>
+
+</section>
+
+<!-- TESTS -->
+<section class="page" id="tests">
+
+  <h1 class="page-title">Testlar</h1>
+  <p class="page-description">Matematikadan namunaviy testni yechib ko‘r.</p>
+
+  <div class="panel">
+
+    <h3>Matematika — 1-test</h3>
+
+    <p style="margin-bottom:15px">1. 15 + 27 nechaga teng?</p>
+
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="35"> 35
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="42"> 42
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="45"> 45
+    </label>
+
+    <label class="quiz-option">
+      <input type="radio" name="q1" value="32"> 32
+    </label>
+
+    <button class="action-btn" onclick="checkTest()">Javobni tekshirish</button>
+
+    <div class="result-message" id="testResult"></div>
+
+  </div>
+
+</section>
+
+<!-- RESULTS -->
+<section class="page" id="results">
+
+  <h1 class="page-title">Natijalar</h1>
+  <p class="page-description">O‘qish davomida erishgan natijalaring.</p>
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <div class="stat-icon blue">📈</div>
+      <h3 id="resultProgress">0%</h3>
+      <p>Progress</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon purple">📖</div>
+      <h3 id="resultLessons">0</h3>
+      <p>Darslar</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon green">📝</div>
+      <h3 id="resultTests">0</h3>
+      <p>Testlar</p>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon orange">🏆</div>
+      <h3 id="resultScore">0</h3>
+      <p>Ball</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- PROFILE -->
+<section class="page" id="profile">
+
+  <h1 class="page-title">Profil</h1>
+  <p class="page-description">Shaxsiy ma’lumotlaringni boshqar.</p>
+
+  <div class="panel">
+
+    <div style="font-size:60px;text-align:center">👨🏻‍🎓</div>
+
+    <input class="form-input" id="profileName" placeholder="Ismingni yoz">
+
+    <button class="action-btn" onclick="saveProfile()">Profilni saqlash</button>
+
+  </div>
+
+  <div class="panel">
+
+    <h3>Sozlamalar</h3>
+
+    <button class="secondary-btn" onclick="toggleTheme()">🌙 Tungi / Kunduzgi rejim</button>
+
+    <br><br>
+
+    <button class="secondary-btn" onclick="resetData()">Ma’lumotlarni tozalash</button>
+
+  </div>
+
+</section>
+
+<!-- LESSON -->
+<section class="page" id="lesson">
+
+  <button class="secondary-btn" onclick="showPage('subjects')">← Fanlarga qaytish</button>
+
+  <h1 class="page-title" style="margin-top:20px">Matematika</h1>
+  <p class="page-description">Algebra — namunaviy dars</p>
+
+  <div class="panel lesson-text">
+
+    <h3>1. Algebra nima?</h3>
+
+    <p>Algebra matematikada sonlar, belgilar va noma’lum qiymatlar bilan ishlashni o‘rganuvchi bo‘limdir.</p>
+
+    <h3>2. O‘zgaruvchi</h3>
+
+    <p>O‘zgaruvchi — qiymati o‘zgarishi mumkin bo‘lgan harf yoki belgi.</p>
+
+    <div class="lesson-example">
+      Masalan: x + 5 = 12<br>
+      x = 12 − 5<br>
+      x = 7
+    </div>
+
+    <h3>3. Tenglamani yechish</h3>
+
+    <p>Tenglamani yechishda noma’lum qiymatni topish uchun amallarni teskari tartibda bajarish mumkin.</p>
+
+    <button class="secondary-btn" onclick="readLesson()">🔊 Darsni ovoz chiqarib o‘qish</button>
+
+    <button class="action-btn" onclick="completeLesson()" style="margin-top:20px">Darsni tugatdim ✓</button>
+
+  </div>
+
+</section>
+
 </div>
+
 </main>
-<footer>
-    ILMIX © 2026 | Hammasiga erishish o‘z qo‘lingda.
-</footer>
+
+</div>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav">
+
+  <button class="active" onclick="showPage('home',this)">
+    <span>⌂</span>Bosh sahifa
+  </button>
+
+  <button onclick="showPage('subjects',this)">
+    <span>📚</span>Fanlar
+  </button>
+
+  <button onclick="showPage('ai',this)">
+    <span>🤖</span>AI Ustoz
+  </button>
+
+  <button onclick="showPage('tests',this)">
+    <span>📝</span>Testlar
+  </button>
+
+  <button onclick="showPage('profile',this)">
+    <span>👤</span>Profil
+  </button>
+
+</nav>
+
 <script>
-function goTeacher() {
-    document.getElementById("ustoz").scrollIntoView({
-        behavior: "smooth"
+
+/* SUBJECTS */
+
+const subjects = [
+  {name:"Matematika",icon:"📐",color:"#edf1ff",progress:90},
+  {name:"Ona tili",icon:"📖",color:"#f2eaff",progress:85},
+  {name:"Fizika",icon:"⚛️",color:"#e7f9ef",progress:76},
+  {name:"Kimyo",icon:"🧪",color:"#fff1e4",progress:70},
+  {name:"Biologiya",icon:"🌿",color:"#e7f9ef",progress:80},
+  {name:"Tarix",icon:"🏛️",color:"#fff0e8",progress:72},
+  {name:"Ingliz tili",icon:"🇬🇧",color:"#edf1ff",progress:65},
+  {name:"Geografiya",icon:"🌍",color:"#e7f9ef",progress:60}
+];
+
+/* DATA */
+
+let data = JSON.parse(localStorage.getItem("ilmixData")) || {
+  lessons:0,
+  tests:0,
+  score:0,
+  completed:[],
+  activities:[],
+  name:""
+};
+
+function saveData(){
+  localStorage.setItem("ilmixData",JSON.stringify(data));
+}
+
+function renderSubjects(){
+
+  const html = subjects.map((s,i)=>`
+
+    <div class="subject-card" onclick="openLesson('${s.name}')">
+
+      <div class="subject-top">
+        <div class="subject-icon" style="background:${s.color}">${s.icon}</div>
+        <span style="color:#8995a8;font-size:12px">→</span>
+      </div>
+
+      <h3>${s.name}</h3>
+      <p>O‘rganish va mashq qilish</p>
+
+      <div class="progress-info">
+        <span>Namunaviy progress</span>
+        <span>${s.progress}%</span>
+      </div>
+
+      <div class="progress">
+        <div style="width:${s.progress}%;background:#526cf3"></div>
+      </div>
+
+    </div>
+
+  `).join("");
+
+  document.getElementById("homeSubjects").innerHTML=html;
+  document.getElementById("allSubjects").innerHTML=html;
+}
+
+/* NAVIGATION */
+
+function showPage(id,btn){
+
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".nav-btn,.mobile-nav button").forEach(b=>b.classList.remove("active"));
+
+  if(btn){
+    btn.classList.add("active");
+  }else{
+    const buttons=document.querySelectorAll(".nav-btn,.mobile-nav button");
+    buttons.forEach(b=>{
+      if(b.getAttribute("onclick")?.includes("'"+id+"'")){
+        b.classList.add("active");
+      }
     });
-    document.getElementById("topic").focus();
+  }
+
+  window.scrollTo({top:0,behavior:"smooth"});
+
+  updateStats();
 }
-function pick(fan) {
-    document.getElementById("topic").value =
-        fan + " mavzusini tushuntir";
-    goTeacher();
+
+/* LESSON */
+
+function openLesson(name){
+  document.querySelector("#lesson .page-title").textContent=name;
+  showPage("lesson");
 }
-function lesson() {
-    let topic = document.getElementById("topic").value;
-    if(topic.trim() == "") {
-        alert("Avval mavzuni yozing!");
-    } else {
-        alert("AI Ustoz keyingi bosqichda ulanadi: " + topic);
-    }
+
+function completeLesson(){
+
+  data.lessons++;
+  data.completed.push("lesson-"+Date.now());
+
+  data.activities.unshift({
+    title:"Dars tugatildi",
+    text:"Yangi dars o‘rganildi",
+    score:"+10 ball"
+  });
+
+  data.score+=10;
+
+  saveData();
+  updateStats();
+
+  alert("Ajoyib! Dars tugatildi. +10 ball");
+  showPage("home");
 }
-document.getElementById("topic").addEventListener("keydown", function(e) {
-    if(e.key == "Enter") {
-        lesson();
-    }
-});
+
+/* VOICE */
+
+function readLesson(){
+
+  if(!("speechSynthesis" in window)){
+    alert("Brauzeringiz ovozli o‘qishni qo‘llab-quvvatlamaydi");
+    return;
+  }
+
+  const text=document.querySelector(".lesson-text").innerText;
+
+  const speech=new SpeechSynthesisUtterance(text);
+  speech.lang="uz-UZ";
+  speech.rate=0.9;
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(speech);
+}
+
+/* AI DEMO */
+
+function sendAI(){
+
+  const input=document.getElementById("aiInput");
+  const question=input.value.trim();
+
+  if(!question)return;
+
+  const chat=document.getElementById("chatBox");
+
+  chat.innerHTML+=`
+    <div class="chat-message user">${question}</div>
+    <div class="chat-message">
+      Bu hozircha demo rejim. Haqiqiy AI Ustoz uchun AI API va backend ulanishi kerak.
+    </div>
+  `;
+
+  input.value="";
+  chat.scrollTop=chat.scrollHeight;
+}
+
+function quickAI(text){
+  document.getElementById("aiInput").value=text;
+}
+
+/* TEST */
+
+function checkTest(){
+
+  const selected=document.querySelector('input[name="q1"]:checked');
+  const result=document.getElementById("testResult");
+
+  if(!selected){
+    result.textContent="Avval javobni tanlang.";
+    result.style.color="#f29a42";
+    return;
+  }
+
+  data.tests++;
+
+  if(selected.value==="42"){
+    result.textContent="To‘g‘ri! +10 ball 🎉";
+    result.style.color="#21a96b";
+    data.score+=10;
+  }else{
+    result.textContent="Noto‘g‘ri. To‘g‘ri javob: 42";
+    result.style.color="#e55353";
+  }
+
+  data.activities.unshift({
+    title:"Matematika testi",
+    text:"Test bajarildi",
+    score:selected.value==="42"?"+10 ball":"0 ball"
+  });
+
+  saveData();
+  updateStats();
+}
+
+/* PROFILE */
+
+function saveProfile(){
+
+  data.name=document.getElementById("profileName").value.trim();
+
+  saveData();
+
+  alert("Profil saqlandi!");
+}
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "ilmixTheme",
+    document.body.classList.contains("dark")?"dark":"light"
+  );
+}
+
+/* SEARCH */
+
+function searchSubjects(){
+
+  const query=document.getElementById("searchInput").value.toLowerCase();
+
+  document.querySelectorAll("#allSubjects .subject-card").forEach(card=>{
+    card.style.display=card.innerText.toLowerCase().includes(query)?"":"none";
+  });
+
+  if(query){
+    showPage("subjects");
+  }
+}
+
+/* STATS */
+
+function updateStats(){
+
+  const progress=Math.min(data.lessons*5,100);
+
+  document.getElementById("progressNumber").textContent=progress+"%";
+  document.getElementById("lessonNumber").textContent=data.lessons;
+  document.getElementById("testNumber").textContent=data.tests;
+  document.getElementById("scoreNumber").textContent=data.score;
+
+  document.getElementById("resultProgress").textContent=progress+"%";
+  document.getElementById("resultLessons").textContent=data.lessons;
+  document.getElementById("resultTests").textContent=data.tests;
+  document.getElementById("resultScore").textContent=data.score;
+
+  const activity=document.getElementById("activityList");
+
+  if(data.activities.length){
+
+    activity.innerHTML=data.activities.slice(0,5).map(a=>`
+      <div class="activity-item">
+        <div class="activity-icon">📘</div>
+        <div>
+          <h4>${a.title}</h4>
+          <p>${a.text}</p>
+        </div>
+        <div class="activity-score">${a.score}</div>
+      </div>
+    `).join("");
+
+  }
+}
+
+/* RESET */
+
+function resetData(){
+
+  if(confirm("Barcha ma’lumotlarni tozalashni xohlaysizmi?")){
+
+    localStorage.removeItem("ilmixData");
+
+    location.reload();
+  }
+}
+
+/* INIT */
+
+renderSubjects();
+updateStats();
+
+if(localStorage.getItem("ilmixTheme")==="dark"){
+  document.body.classList.add("dark");
+}
+
+document.getElementById("profileName").value=data.name||"";
+
 </script>
+
 </body>
 </html>
